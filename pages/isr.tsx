@@ -26,14 +26,17 @@ export async function getStaticProps() {
   console.log('notices', notices)
   return {
     props: { tasks, notices },
+    revalidate: 10,
   }
 }
 
-export default function Ssg({ tasks, notices }: SsgProps) {
+export default function Isr({ tasks, notices }: SsgProps) {
   const router = useRouter()
   return (
-    <Layout title="SSG">
-      <p className="mb-3 text-xl font-extrabold text-blue-500">SSG</p>
+    <Layout title="ISR">
+      <p className="mb-3 text-xl font-extrabold text-indigo-500">
+        -------- ISR ---------
+      </p>
       <ul className="mb-3">
         {tasks.map((task) => (
           <li key={task.id}>
@@ -48,17 +51,17 @@ export default function Ssg({ tasks, notices }: SsgProps) {
           </li>
         ))}
       </ul>
-      <Link href="/ssr" className="my-3 text-xs" prefetch={true}>
+      <Link href="/ssr" className="my-3 text-xs" prefetch={false}>
         Link to ssr
       </Link>
-      <Link href="/isr" className="my-3 text-xs" prefetch={true}>
-        Link to isr
+      <Link href="/csr" className="my-3 text-xs" prefetch={false}>
+        Link to csr
       </Link>
       <button className="mb-3 text-xs" onClick={() => router.push('/ssr')}>
         Button to ssr
       </button>
-      <button className="mb-3 text-xs" onClick={() => router.push('/isr')}>
-        Button to isr
+      <button className="mb-3 text-xs" onClick={() => router.push('/csr')}>
+        Button to csr
       </button>
     </Layout>
   )

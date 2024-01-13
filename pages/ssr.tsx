@@ -33,7 +33,7 @@ export default function Ssr({ tasks, notices }: SsgProps) {
   const router = useRouter()
   return (
     <Layout title="SSR">
-      <p className="mb-3 text-xl font-extrabold text-blue-500">
+      <p className="mb-3 text-xl font-extrabold text-red-500">
         =========== SSR ===========
       </p>
       <ul className="mb-3">
@@ -54,7 +54,13 @@ export default function Ssr({ tasks, notices }: SsgProps) {
         Link to ssg
       </Link>
       <button className="mb-3 text-xs" onClick={() => router.push('/ssg')}>
-        Button to ssg
+        Button to ssg (No Prefetch)
+      </button>
+      <Link href="/isr" className="my-3 text-xs" prefetch={true}>
+        Link to isr
+      </Link>
+      <button className="mb-3 text-xs" onClick={() => router.prefetch('/isr')}>
+        Button to isr (Prefetch)
       </button>
     </Layout>
   )
